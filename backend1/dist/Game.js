@@ -1,37 +1,28 @@
-import { Chess } from "chess.js";
-import { WebSocket } from "ws";
-import { GAME_OVER, MOVE } from "./messages";
-
-export class Game {
-    public player1: WebSocket;
-    public player2: WebSocket;
-    public board: Chess;
-    private startTime: Date;
-
-    constructor(player1: WebSocket, player2: WebSocket) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Game = void 0;
+const chess_js_1 = require("chess.js");
+const messages_1 = require("./messages");
+class Game {
+    constructor(player1, player2) {
         this.player1 = player1;
         this.player2 = player2;
-        this.board = new Chess();
+        this.board = new chess_js_1.Chess();
         this.startTime = new Date();
         this.player1.send(JSON.stringify({
             type: "init_game",
             payload: {
                 color: "white",
             }
-        }))
+        }));
         this.player2.send(JSON.stringify({
             type: "init_game",
             payload: {
                 color: "black",
             }
-        }))
+        }));
     }
-
-    makeMove(socket: WebSocket, move: {
-        from: string,
-        to: string
-    }) {
-
+    makeMove(socket, move) {
         if (this.board.moves().length % 2 === 0 && socket === this.player1) {
             return;
         }
@@ -41,38 +32,39 @@ export class Game {
         console.log("did not early return");
         try {
             this.board.move(move);
-        } catch (e) { 
-            console.log(e); 
+        }
+        catch (e) {
+            console.log(e);
             return;
         }
         console.log("move succeeded");
-
         if (this.board.isGameOver()) {
             this.player1.emit(JSON.stringify({
-                type: GAME_OVER,
+                type: messages_1.GAME_OVER,
                 payload: {
                     winner: this.board.turn() === "w" ? "black" : "white",
                 }
-            }))
+            }));
             this.player2.emit(JSON.stringify({
-                type: GAME_OVER,
+                type: messages_1.GAME_OVER,
                 payload: {
                     winner: this.board.turn() === "w" ? "black" : "white",
                 }
-            }))
+            }));
             return;
         }
-
         if (this.board.moves().length % 2 === 0) {
             this.player1.send(JSON.stringify({
-                type: MOVE,
+                type: messages_1.MOVE,
                 payload: move
             }));
-        } else {
+        }
+        else {
             this.player2.send(JSON.stringify({
-                type: MOVE,
+                type: messages_1.MOVE,
                 payload: move
             }));
         }
     }
 }
+exports.Game = Game;
