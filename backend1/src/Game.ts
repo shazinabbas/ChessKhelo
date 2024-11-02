@@ -13,6 +13,18 @@ export class Game {
         this.player2 = player2;
         this.board = new Chess();
         this.startTime = new Date();
+        this.player1.send(JSON.stringify({
+            type: "init_game",
+            payload: {
+                color: "white",
+            }
+        }))
+        this.player2.send(JSON.stringify({
+            type: "init_game",
+            payload: {
+                color: "black",
+            }
+        }))
     }
 
     makeMove(socket: WebSocket, move: {
@@ -38,7 +50,14 @@ export class Game {
                 payload: {
                     winner: this.board.turn() === "w" ? "black" : "white",
                 }
-            }));
+            }))
+            this.player2.emit(JSON.stringify({
+                type: GAME_OVER,
+                payload: {
+                    winner: this.board.turn() === "w" ? "black" : "white",
+                }
+            }))
+            return;
         }
 
         if (this.board.moves.length % 2 === 0) {
