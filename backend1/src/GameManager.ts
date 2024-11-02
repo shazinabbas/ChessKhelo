@@ -1,17 +1,21 @@
 
-
-
-export class GameManager () {
+export class GameManager {
     private games: Game[];
+
     constructor() {
         this.games = [];
     }
-    createGame() {
-        const game = new Game();
-        this.games.push(game);
-        return game;
+    
+    addUser(socket: WebSocket){
+
     }
-    getGame(gameId) {
-        return this.games.find(game => game.id === gameId);
+
+    removeUser(socket: WebSocket){
+
     }
+
+    private handleMessage(){
+
+    }
+
 }
