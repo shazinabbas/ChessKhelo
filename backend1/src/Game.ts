@@ -1,6 +1,6 @@
 import { Chess } from "chess.js";
 import { WebSocket } from "ws";
-import { GAME_OVER, MOVE } from "./messages";
+import { GAME_OVER, INIT_GAME, MOVE } from "./messages";
 
 export class Game {
     public player1: WebSocket;
@@ -14,17 +14,17 @@ export class Game {
         this.board = new Chess();
         this.startTime = new Date();
         this.player1.send(JSON.stringify({
-            type: "init_game",
+            type: INIT_GAME,
             payload: {
                 color: "white",
             }
-        }))
+        }));
         this.player2.send(JSON.stringify({
-            type: "init_game",
+            type: INIT_GAME,
             payload: {
                 color: "black",
             }
-        }))
+        }));
     }
 
     makeMove(socket: WebSocket, move: {
@@ -48,13 +48,13 @@ export class Game {
         console.log("move succeeded");
 
         if (this.board.isGameOver()) {
-            this.player1.emit(JSON.stringify({
+            this.player1.send(JSON.stringify({
                 type: GAME_OVER,
                 payload: {
                     winner: this.board.turn() === "w" ? "black" : "white",
                 }
             }))
-            this.player2.emit(JSON.stringify({
+            this.player2.send(JSON.stringify({
                 type: GAME_OVER,
                 payload: {
                     winner: this.board.turn() === "w" ? "black" : "white",
@@ -64,15 +64,15 @@ export class Game {
         }
 
         if (this.board.moves().length % 2 === 0) {
-            this.player1.send(JSON.stringify({
-                type: MOVE,
-                payload: move
-            }));
-        } else {
             this.player2.send(JSON.stringify({
                 type: MOVE,
                 payload: move
-            }));
+            }))
+        } else {
+            this.player1.send(JSON.stringify({
+                type: MOVE,
+                payload: move
+            }))
         }
     }
 }

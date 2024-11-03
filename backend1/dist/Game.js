@@ -39,13 +39,13 @@ class Game {
         }
         console.log("move succeeded");
         if (this.board.isGameOver()) {
-            this.player1.emit(JSON.stringify({
+            this.player1.send(JSON.stringify({
                 type: messages_1.GAME_OVER,
                 payload: {
                     winner: this.board.turn() === "w" ? "black" : "white",
                 }
             }));
-            this.player2.emit(JSON.stringify({
+            this.player2.send(JSON.stringify({
                 type: messages_1.GAME_OVER,
                 payload: {
                     winner: this.board.turn() === "w" ? "black" : "white",
@@ -54,13 +54,13 @@ class Game {
             return;
         }
         if (this.board.moves().length % 2 === 0) {
-            this.player1.send(JSON.stringify({
+            this.player2.send(JSON.stringify({
                 type: messages_1.MOVE,
                 payload: move
             }));
         }
         else {
-            this.player2.send(JSON.stringify({
+            this.player1.send(JSON.stringify({
                 type: messages_1.MOVE,
                 payload: move
             }));
