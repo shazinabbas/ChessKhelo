@@ -1,5 +1,5 @@
 // import { Bot, BookOpen, Eye, Globe, HelpCircle, MessageSquare, Search, Newspaper, Users, MoreHorizontal } from 'lucide-react'
-import { Bot, BookOpen,MessageSquare,} from 'lucide-react'
+// import { Bot, BookOpen,MessageSquare,} from 'lucide-react'
 
 export const Landing = () => {
   return (
@@ -86,39 +86,75 @@ export const Landing = () => {
                   Play Chess Online<br />
                   on the #1 Site!
                 </h1>
-                <div className="flex gap-8 text-gray-300">
-                  <div>
-                    <div className="text-2xl font-bold">15,025,821</div>
-                    <div className="text-sm">Games Today</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold">184,428</div>
-                    <div className="text-sm">Playing Now</div>
-                  </div>
-                </div>
+                {/*   */}
               </div>
 
               <div className="space-y-4">
-                <button className="w-full bg-[#82B14B] hover:bg-[#729C42] text-white p-4 rounded-lg flex items-center justify-center gap-2">
-                  <Bot className="w-6 h-6" />
-                  <div>
-                    <div className="text-xl font-bold">Play Online</div>
-                    <div className="text-sm opacity-90">Play with someone at your level</div>
-                  </div>
+              <button 
+                className={`
+                    w-full 
+                    relative 
+                    group 
+                    rounded-xl 
+                    transition-all 
+                    active:translate-y-1 
+                    hover:shadow-[0_0_1px_1px_rgba(130,177,75,0.8)] 
+                    ${"bg-gradient-to-b from-[#82B14B] to-[#7baa44]"}
+                `}>
+                                  
+                        {/* Button shadow/3D effect layers */}
+                        <div className="absolute inset-0 rounded-xl bg-[#5a8738] translate-y-1" />
+                        <div className="absolute inset-0 rounded-xl bg-[#6a9c43] translate-y-1" />
+
+                        {/* Main button content */}
+                        <div className="
+                            relative 
+                            flex 
+                            items-center 
+                            gap-4 
+                            px-6 
+                            py-4 
+                            rounded-xl 
+                            bg-gradient-to-b 
+                            from-[#82B14B] 
+                            to-[#7baa44]
+                            text-left
+                            transition-all
+                            group-hover:shadow-[0_0_50px_0.25px_rgba(130,177,75,0.8)]  /* Increased glow effect */
+                        ">
+                                      
+                        {/* Chess piece icon */}
+                        <div className="relative w-12 h-12">
+                            <div className="absolute inset-0 flex items-center justify-center text-white text-3xl transform -rotate-12">
+                                ♟
+                            </div>
+                            <div className="absolute inset-0 flex items-center justify-center text-white/30 text-3xl transform translate-x-1 -rotate-12">
+                                👆
+                            </div>
+                        </div>
+
+                        {/* Text content */}
+                        <div className="text-white">
+                            <div className="text-2xl font-bold">Play</div>
+                            <div className="text-sm text-white/90">Chess</div>
+                        </div>
+                    </div>
                 </button>
-                <button className="w-full bg-[#666666] hover:bg-[#555555] text-white p-4 rounded-lg flex items-center justify-center gap-2">
+
+
+                {/* <button className="w-full bg-[#666666] hover:bg-[#555555] text-white p-4 rounded-lg flex items-center justify-center gap-2">
                   <MessageSquare className="w-6 h-6" />
                   <div>
                     <div className="text-xl font-bold">Play Bots</div>
                     <div className="text-sm opacity-90">Play vs customizable training bots</div>
                   </div>
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
 
           {/* Puzzles Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-4xl font-bold text-white mb-4">Solve Chess Puzzles</h2>
               <button className="bg-[#82B14B] hover:bg-[#729C42] text-white px-8 py-3 rounded-lg text-xl font-bold flex items-center gap-2">
@@ -129,7 +165,7 @@ export const Landing = () => {
             <div className="flex justify-center">
               <img src="/chessboard1.png" alt="Chess Puzzle" className="max-w-[400px] w-full h-auto" />
             </div>
-          </div>
+          </div> */}
         </div>
       </main>
     </div>
