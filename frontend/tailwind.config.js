@@ -8,6 +8,9 @@ export default {
     extend: {
       colors: {
         'custom-dark': '#302E2B',
+        'board-light': '#EBECD0',
+        'board-dark': '#739552',
+        'grey-dark': '#262522',
       },
     },
   },
