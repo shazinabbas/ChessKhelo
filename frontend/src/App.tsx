@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <button>
+      <button className='bg-red-200'>
         Join Room
       </button>
     </>
