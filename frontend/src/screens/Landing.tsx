@@ -1,4 +1,5 @@
-import { Bot, BookOpen, Eye, Globe, HelpCircle, MessageSquare, Search, Newspaper, Users, MoreHorizontal } from 'lucide-react'
+// import { Bot, BookOpen, Eye, Globe, HelpCircle, MessageSquare, Search, Newspaper, Users, MoreHorizontal } from 'lucide-react'
+import { Bot, BookOpen,MessageSquare,} from 'lucide-react'
 
 export const Landing = () => {
   return (
