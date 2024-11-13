@@ -17,7 +17,7 @@ class GameManager {
         this.users = this.users.filter(user => user !== socket);
     }
     addHandler(socket) {
-        socket.on('message', (data) => {
+        socket.on("message", (data) => {
             const message = JSON.parse(data.toString());
             if (message.type === messages_1.INIT_GAME) {
                 if (this.pendingUser) {

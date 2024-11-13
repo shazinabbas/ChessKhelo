@@ -1,4 +1,4 @@
-import { Chess } from "chess.js";
+import { Chess } from "chess.js"
 import { WebSocket } from "ws";
 import { GAME_OVER, INIT_GAME, MOVE } from "./messages";
 
@@ -32,10 +32,10 @@ export class Game {
         to: string
     }) {
 
-        if (this.board.moves().length % 2 === 0 && socket === this.player1) {
+        if (this.board.moves.length % 2 === 0 && socket !== this.player1) {
             return;
         }
-        if (this.board.moves().length % 2 === 1 && socket === this.player2) {
+        if (this.board.moves.length % 2 === 1 && socket !== this.player2) {
             return;
         }
         console.log("did not early return");

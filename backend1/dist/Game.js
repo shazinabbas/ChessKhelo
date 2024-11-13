@@ -10,23 +10,23 @@ class Game {
         this.board = new chess_js_1.Chess();
         this.startTime = new Date();
         this.player1.send(JSON.stringify({
-            type: "init_game",
+            type: messages_1.INIT_GAME,
             payload: {
                 color: "white",
             }
         }));
         this.player2.send(JSON.stringify({
-            type: "init_game",
+            type: messages_1.INIT_GAME,
             payload: {
                 color: "black",
             }
         }));
     }
     makeMove(socket, move) {
-        if (this.board.moves().length % 2 === 0 && socket === this.player1) {
+        if (this.board.moves.length % 2 === 0 && socket !== this.player1) {
             return;
         }
-        if (this.board.moves().length % 2 === 1 && socket === this.player2) {
+        if (this.board.moves.length % 2 === 1 && socket !== this.player2) {
             return;
         }
         console.log("did not early return");
