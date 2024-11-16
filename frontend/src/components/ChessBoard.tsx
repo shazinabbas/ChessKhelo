@@ -13,26 +13,28 @@ export const  ChessBoard = ({ board, socket }: {
 }) => {
     const [from, setFrom] = useState<null | Square>(null);
     const [to, setTo] = useState<null | Square>(null);
+
     return <div className="text-white-200">
         {board.map((row, i) => {
             return <div key={i} className="flex">
                 {row.map((square, j) => {
+                    const squareRepresentation = String.fromCharCode(97 + (j % 8)) + "" + (8 - i) as Square;
+
                     return <div onClick={() => {
                         if (!from) {
-                            setFrom(square?.square ?? null);
+                            setFrom(squareRepresentation);
                         } else {
-                            setTo(square?.square ?? null);
                             socket.send(JSON.stringify({
                                 type: MOVE,
                                 payload: {
                                     from,
-                                    to:square?.square
+                                    to:squareRepresentation,
                                 }
                             }))
-
+                            setFrom(null);
                             console.log({
                                 from,
-                                to
+                                to:squareRepresentation,
                             })
                         }
                     }} key={j} className={`w-20 h-20 ${(i+j)%2 === 0 ? 'bg-board-dark': 'bg-board-light'}`}>
