@@ -39,7 +39,7 @@ export const Game = () => {
                     break;
             }
         }
-    }, [chess, socket]);
+    }, [chess,socket]);
 
     if (!socket) return <div>Connecting...</div>
     

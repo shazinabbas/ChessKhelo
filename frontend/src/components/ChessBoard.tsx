@@ -26,7 +26,7 @@ export const  ChessBoard = ({ board, socket }: {
                                 type: MOVE,
                                 payload: {
                                     from,
-                                    to
+                                    to:square?.square
                                 }
                             }))
 

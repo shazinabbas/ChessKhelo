@@ -12,6 +12,7 @@ export const useSocket = () => {
             setSocket(ws);
         }
         ws.onclose = () => {
+            console.log('Disconnected from server');
             setSocket(null);
         }
         return () => {
