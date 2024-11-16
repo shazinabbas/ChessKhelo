@@ -15,7 +15,7 @@ export const Game = () => {
 
     useEffect(() => {
         if (!socket) {
-            return;
+            return
         }
         socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
@@ -27,19 +27,19 @@ export const Game = () => {
                     console.log("Game Initialized");
                     break;
                 case MOVE:
-                    const move = message.payload;
+                    { const move = message.payload;
                     chess.move(move);
                     setBoard(chess.board());
                     console.log("Move made");
-                    break;
+                    break; }
                 case GAME_OVER:
                     console.log("Game Over");
                     break;
                 default:
-                    console.log("Unknown message type");
+                    break;
             }
         }
-    }, [socket])
+    }, [chess,socket]);
 
     if (!socket) return <div>Connecting...</div>
     
@@ -47,24 +47,21 @@ export const Game = () => {
         <div className="pt-8 max-w-screen-lg w-full">
             <div className="grid grid-cols-6 gap-4 w-full">
                 <div className="col-span-4 w-full flex justify-center">
-                    <ChessBoard board={board} />
+                    <ChessBoard socket={ socket } board={board} />
                 </div>
-
-                 
                 <div className="col-span-2 w-full flex justify-center bg-grey-dark">
-    <div className="pt-8 max-w-sm w-full px-4">
-        <Button
-            onClick={() => {
-                socket.send(JSON.stringify({
-                    type: INIT_GAME
-                }))
-            }}
-        >
-            Play Game
-        </Button>
-    </div>
-</div>
-
+                    <div className="pt-8 max-w-sm w-full px-4">
+                        <Button
+                            onClick={() => {
+                                socket.send(JSON.stringify({
+                                    type: INIT_GAME
+                                }))
+                            }}
+                        >
+                            Play Game
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
